@@ -28,8 +28,10 @@ public class GameManager : MonoBehaviour
     public List<GameObject> answerObjects;
     private List<GameObject> snappedObjects;
 
-    public GameObject questGuardian;
-
+    public GameObject TempGO,questGuardian;
+    private string LevelName;
+    
+    
     int numQuestions = 10;
     int numCorrect = 0;
 
@@ -74,23 +76,28 @@ public class GameManager : MonoBehaviour
         {
             case 1:
                 Debug.Log("start lvl 1");
+                LevelName = "easy";
                 DisableMenu();
                 Lvl1();
                 break;
 
             case 2:
                 Debug.Log("start lvl 2");
+                LevelName = "medium";
+
                 DisableMenu();
                 Lvl2();
                 break;
             case 3:
                 Debug.Log("start lvl 3");
+                LevelName = "hard";
                 DisableMenu();
                 Lvl3();
                 break;
 
             case 4:
                 Debug.Log("start lvl 4");
+                LevelName = "Lengendary";
                 DisableMenu();
                 Lvl4();
                 break;
@@ -228,6 +235,8 @@ public class GameManager : MonoBehaviour
         int index = numCorrect;
         int[] question = questions[index];
         answer = question[1];
+        TempGO = currentDigit;
+
         Debug.Log("The whole name : " + answerObjects[0].name);
         Debug.Log("just the digit : "+ char.GetNumericValue(answerObjects[0].name[0]));
         Debug.Log("Value of the number = "+digitTag.digitValue);
@@ -251,7 +260,8 @@ public class GameManager : MonoBehaviour
             socketInteractor.interactionLayerMask = LayerMask.GetMask("Ignore Raycast");*/
             if (answerObjects.Count == 0)
             {
-                ClearAnswerObjects();
+
+                ClearAnswerObjects(currentDigit);
                 // ask the next question or end the game
                 if (numCorrect < numQuestions)
                 {
@@ -259,11 +269,12 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    questionText.text = "Game Over. You got " + numCorrect + " out of " + numQuestions + " correct.";
-                    foreach (XRGrabInteractable numberObject in numberObjects)
+                    questionText.text = "Congratulation! you finished the " + LevelName +  " level!";
+
+                   /* foreach (XRGrabInteractable numberObject in numberObjects)
                     {
                         numberObject.gameObject.SetActive(false);
-                    }
+                    }*/
                 }
             }
         }
@@ -274,12 +285,15 @@ public class GameManager : MonoBehaviour
         }
     }
     
+    void ClearAnswerObjects(GameObject currentDigit)
+    {
+        Destroy(currentDigit);
+    }
+
     void ClearAnswerObjects()
     {
-        foreach (XRSocketInteractor snapZone in snapZones)
-        {
-            snapZone.socketActive = false;
-        }
+        Destroy(TempGO);
+        //  Destroy(currentDigit);
     }
 
     // Fisher-Yates shuffle algorithm for shuffling array elements randomly

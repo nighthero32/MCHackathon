@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7242700348475822819}
   - component: {fileID: 6154657892788125128}
   - component: {fileID: 6386741356111952465}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube_007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7192259362617165426}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Anim_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 1763172437}
   - component: {fileID: 1763172436}
   - component: {fileID: 1763172435}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4161500591237619750}
   - component: {fileID: 515335760961510014}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: New Timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -26,11 +26,13 @@ public class CheckAnswer : MonoBehaviour
 // Check if the digit value matches the expected value
             if (digitTag != null && digitTag.digitValue == char.GetNumericValue(gameManager.answerObjects[0].name[0]))
            {
-                   // Set the tag of the object to "Untagged" so it can't be picked up again
-            other.tag = "Untagged";
+                   
+                // Set the tag of the object to "Untagged" so it can't be picked up again
+                other.tag = "Untagged";
+                other.gameObject.layer = LayerMask.NameToLayer("NumberUsed");
 
-                  // Set the current digit to the other object
-            currentDigit = other.gameObject;
+                // Set the current digit to the other object
+                currentDigit = other.gameObject;
 
               // Snap the object into place
             socketInteractor.socketActive = true;

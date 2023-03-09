@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3006094734577136638}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Anim_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 679963486}
   - component: {fileID: 679963485}
   - component: {fileID: 679963484}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 8480751018636218263}
   - component: {fileID: 8607366817178354254}
   - component: {fileID: 1689076696183633538}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube_014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1887320729377423404}
   - component: {fileID: 3685562637992602523}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TL_Anim_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
