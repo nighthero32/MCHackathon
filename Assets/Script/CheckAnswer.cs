@@ -20,15 +20,15 @@ public class CheckAnswer : MonoBehaviour
 
             // Get the DigitTag component of the other object
             DigitTag digitTag = other.GetComponent<DigitTag>();
-             socketInteractor = gameObject.GetComponent<XRSocketInteractor>();
+            socketInteractor = gameObject.GetComponent<XRSocketInteractor>();
 
 
-// Check if the digit value matches the expected value
+                // Check if the digit value matches the expected value
             if (digitTag != null && digitTag.digitValue == char.GetNumericValue(gameManager.answerObjects[0].name[0]))
            {
                    
                 // Set the tag of the object to "Untagged" so it can't be picked up again
-                other.tag = "Untagged";
+                other.tag = "BadAnswer";
                 other.gameObject.layer = LayerMask.NameToLayer("NumberUsed");
 
                 // Set the current digit to the other object

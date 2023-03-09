@@ -28,17 +28,20 @@ public class GameManager : MonoBehaviour
     public List<GameObject> answerObjects;
     private List<GameObject> snappedObjects;
 
-    public GameObject TempGO,questGuardian;
+    public GameObject TempGO, questGuardian;
     private string LevelName;
-    
-    
+
+    [SerializeField]
+    Transform HeadsetLocation;
+
+
     int numQuestions = 10;
     int numCorrect = 0;
 
     List<int[]> questions = new List<int[]>();
 
     [SerializeField]
-    private GameObject DifficultyMenu;
+    private GameObject DifficultyMenu, NumberParents;
 
     public int EquationAnswer;
 
@@ -154,6 +157,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    Vector3 spawnLocation( )
+    {
+        var Xlocation = Random.Range(-1f, 1f);
+        var ZLocation = Random.Range(-1f, 1f);
+        var NewLocation = new Vector3(HeadsetLocation.transform.position.x + Xlocation, 0, HeadsetLocation.transform.position.z + ZLocation);
+
+        return NewLocation;
+    }
+    int RandomNumber(int min, int max)
+    {
+        return Random.Range(min, max);
+    }
     void DisplayQuestion(int index)
     {
         // display the question
@@ -167,20 +182,38 @@ public class GameManager : MonoBehaviour
         int[] values = { question[0], question[1] };
         ShuffleArray(values);
         int numDigits = values[1].ToString().Length;
-        Debug.Log("Before loop");
         for (int i = 0; i < numDigits; i++)
         {
-            Debug.Log("Inside loop, i = " + i + " numDigits = " + numDigits);
+            Debug.Log("number of digit expected: " + i);
             GameObject objPrefab = numberObjectsPrefabs[values[1].ToString()[i] - '0'];
             GameObject obj = Instantiate(objPrefab);
-            obj.transform.parent = numberObjectsPrefabs[i].transform.parent;
-           // obj.transform.position = GetRandomPositionInQuestGuardian();
-            obj.transform.position = numberObjectsPrefabs[i].transform.position;
+            obj.transform.parent = NumberParents.transform;
+            // obj.transform.position = GetRandomPositionInQuestGuardian();
+            // obj.transform.position = numberObjectsPrefabs[i].transform.position;
+            obj.transform.position = spawnLocation();
             obj.transform.rotation = numberObjectsPrefabs[i].transform.rotation;
 
             obj.SetActive(true);
             answerObjects.Add(obj);
         }
+        for (int i = 0; i<10;i++)
+        {
+          int tempNum = RandomNumber(0, numberObjectsPrefabs.Length);
+          if (question[1].ToString().Contains(tempNum.ToString()))
+          {
+                //Need to figure out how to recurse the fonction to be able to redo it
+          }
+          else
+          {
+              GameObject objPrefab = numberObjectsPrefabs[tempNum];
+              GameObject obj = Instantiate(objPrefab);
+              obj.tag = "BadAnswer"; 
+             // obj.transform.parent = NumberParents.transform;
+              obj.transform.position = spawnLocation();
+          }
+         // int tempNum = Random.Range(0, numberObjectsPrefabs.Length);
+        }
+
 
         /*        -------------------------------
           // create the answer object and place it inside the Quest Guardian
@@ -237,9 +270,9 @@ public class GameManager : MonoBehaviour
         answer = question[1];
         TempGO = currentDigit;
 
-        Debug.Log("The whole name : " + answerObjects[0].name);
-        Debug.Log("just the digit : "+ char.GetNumericValue(answerObjects[0].name[0]));
-        Debug.Log("Value of the number = "+digitTag.digitValue);
+       // Debug.Log("The whole name : " + answerObjects[0].name);
+      //  Debug.Log("just the digit : "+ char.GetNumericValue(answerObjects[0].name[0]));
+       // Debug.Log("Value of the number = "+digitTag.digitValue);
 
         Debug.Log(answerObjects.Contains(currentDigit));
          if (answerObjects.Contains(currentDigit/*socketInteractor.gameObject*/))
@@ -258,10 +291,21 @@ public class GameManager : MonoBehaviour
             socketInteractor.transform.position = snapZones[answerIndex].transform.position;
             socketInteractor.transform.rotation = snapZones[answerIndex].transform.rotation;
             socketInteractor.interactionLayerMask = LayerMask.GetMask("Ignore Raycast");*/
+
+
             if (answerObjects.Count == 0)
             {
-
-                ClearAnswerObjects(currentDigit);
+                GameObject[] objArray = GameObject.FindGameObjectsWithTag("Answer");
+                foreach (GameObject obj in objArray)
+                {
+                    Destroy(obj);
+                }
+                GameObject[] objArray2 = GameObject.FindGameObjectsWithTag("BadAnswer");
+                foreach (GameObject obj in objArray2)
+                {
+                    Destroy(obj);
+                }
+                //ClearAnswerObjects(currentDigit);
                 // ask the next question or end the game
                 if (numCorrect < numQuestions)
                 {
@@ -269,6 +313,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
+
                     questionText.text = "Congratulation! you finished the " + LevelName +  " level!";
 
                    /* foreach (XRGrabInteractable numberObject in numberObjects)
@@ -285,10 +330,10 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    void ClearAnswerObjects(GameObject currentDigit)
-    {
-        Destroy(currentDigit);
-    }
+   // void ClearAnswerObjects(GameObject currentDigit)
+   // {
+   //     Destroy(currentDigit);
+   // }
 
     void ClearAnswerObjects()
     {
