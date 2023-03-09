@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> answerObjects;
     private List<GameObject> snappedObjects;
 
+    public GameObject questGuardian;
 
     int numQuestions = 10;
     int numCorrect = 0;
@@ -166,15 +167,26 @@ public class GameManager : MonoBehaviour
             GameObject objPrefab = numberObjectsPrefabs[values[1].ToString()[i] - '0'];
             GameObject obj = Instantiate(objPrefab);
             obj.transform.parent = numberObjectsPrefabs[i].transform.parent;
+           // obj.transform.position = GetRandomPositionInQuestGuardian();
             obj.transform.position = numberObjectsPrefabs[i].transform.position;
-            obj.transform.rotation = numberObjectsPrefabs[i].transform.rotation; 
-          
-            //  obj.transform.parent = numberObjects[i].transform.parent;
-           // obj.transform.position = numberObjects[i].transform.position;
-          //  obj.transform.rotation = numberObjects[i].transform.rotation;
+            obj.transform.rotation = numberObjectsPrefabs[i].transform.rotation;
+
             obj.SetActive(true);
             answerObjects.Add(obj);
         }
+
+        /*        -------------------------------
+          // create the answer object and place it inside the Quest Guardian
+        GameObject answerPrefab = numberObjectsPrefabs[answer.ToString()[0] - '0'];
+        GameObject answerObj = Instantiate(answerPrefab);
+        answerObj.transform.parent = questGuardian.transform; // place it inside the Quest Guardian
+        answerObj.transform.localPosition = Vector3.zero; // set its local position to the center of the Quest Guardian
+        answerObj.transform.rotation = Quaternion.identity; // set its rotation to zero
+        answerObj.SetActive(true);
+        answerObjects.Add(answerObj);
+                -------------------------------
+         */
+
         /*for (int i = 0; i < numDigits; i++)
         {
             Debug.Log("Inside loop, i = "+ i + " numDigits = "+ numDigits);
@@ -196,6 +208,20 @@ public class GameManager : MonoBehaviour
         }*/
     }
 
+    /*private Vector3 GetRandomPositionInQuestGuardian()
+    {
+        Vector3 center = questGuardian.transform.position;
+        Vector3 size = questGuardian.transform.localScale;
+
+        Vector3 randomPosition = center + new Vector3(
+            (Random.value - 0.5f) * size.x,
+            (Random.value - 0.5f) * size.y,
+            (Random.value - 0.5f) * size.z
+        );
+
+        return randomPosition;
+    }*/
+
     public void CheckAnswer(XRSocketInteractor socketInteractor, DigitTag digitTag, GameObject currentDigit)
     {
         // check the answer
@@ -213,16 +239,16 @@ public class GameManager : MonoBehaviour
             resultText.text = "Correct!";
             numCorrect++;
 
-            Debug.Log(answerObjects.IndexOf(socketInteractor.gameObject));
-            int answerIndex = answerObjects.IndexOf(socketInteractor.gameObject);
+            Debug.Log("# of the index of the gameObject"+answerObjects.IndexOf(currentDigit/*socketInteractor.gameObject*/));
+            int answerIndex = answerObjects.IndexOf(currentDigit/*socketInteractor.gameObject*/);
 
             answerObjects.RemoveAt(answerIndex);
             snapZones[answerIndex].socketActive = true;
-            snappedObjects[answerIndex] = socketInteractor.gameObject;
-            socketInteractor.transform.parent = snapZones[answerIndex].transform;
+            //snappedObjects[answerIndex] = /*socketInteractor.gameObject*/currentDigit;
+            /*socketInteractor.transform.parent = snapZones[answerIndex].transform;
             socketInteractor.transform.position = snapZones[answerIndex].transform.position;
             socketInteractor.transform.rotation = snapZones[answerIndex].transform.rotation;
-            socketInteractor.interactionLayerMask = LayerMask.GetMask("Ignore Raycast");
+            socketInteractor.interactionLayerMask = LayerMask.GetMask("Ignore Raycast");*/
             if (answerObjects.Count == 0)
             {
                 ClearAnswerObjects();
