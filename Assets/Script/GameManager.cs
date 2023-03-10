@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     public int EquationAnswer;
 
     [SerializeField]
-    private float GroundLocation;
+    private float GroundLocation, SpawnNumberRadiusAroundThePlayer;
 
     private void Start()
     {
@@ -171,8 +171,8 @@ public class GameManager : MonoBehaviour
 
     Vector3 spawnLocation( )
     {
-        var Xlocation = Random.Range(-1f, 1f);
-        var ZLocation = Random.Range(-1f, 1f);
+        var Xlocation = Random.Range(-SpawnNumberRadiusAroundThePlayer, SpawnNumberRadiusAroundThePlayer);
+        var ZLocation = Random.Range(-SpawnNumberRadiusAroundThePlayer, SpawnNumberRadiusAroundThePlayer);
         var NewLocation = new Vector3(HeadsetLocation.transform.position.x + Xlocation, GroundLocation, HeadsetLocation.transform.position.z + ZLocation);
 
         return NewLocation;
