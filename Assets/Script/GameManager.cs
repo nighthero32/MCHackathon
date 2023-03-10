@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> answerObjects;
     private List<GameObject> snappedObjects;
 
-    public GameObject TempGO, questGuardian;
+    public GameObject TempGO, questGuardian, ShowResetButton;
     private string LevelName;
 
     [SerializeField]
@@ -326,7 +327,7 @@ public class GameManager : MonoBehaviour
                 {
 
                     questionText.text = "Congratulation! you finished the " + LevelName +  " level!";
-
+                    ShowResetButton.SetActive(true);
                    /* foreach (XRGrabInteractable numberObject in numberObjects)
                     {
                         numberObject.gameObject.SetActive(false);
@@ -362,5 +363,11 @@ public class GameManager : MonoBehaviour
             arr[i] = arr[j];
             arr[j] = temp;
         }
+    }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Replay button push");
     }
 }
