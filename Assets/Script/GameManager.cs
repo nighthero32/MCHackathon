@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private int difficultyLvl;
 
     // The difficulty level of the game
-    private int difficulty;
+    private int difficulty,NbOfDistraction;
 
     public int answer;
 
@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
     private GameObject DifficultyMenu, NumberParents;
 
     public int EquationAnswer;
+
+    [SerializeField]
+    private float GroundLocation;
 
     private void Start()
     {
@@ -80,6 +83,8 @@ public class GameManager : MonoBehaviour
             case 1:
                 Debug.Log("start lvl 1");
                 LevelName = "easy";
+
+                NbOfDistraction = 6;
                 DisableMenu();
                 Lvl1();
                 break;
@@ -88,12 +93,16 @@ public class GameManager : MonoBehaviour
                 Debug.Log("start lvl 2");
                 LevelName = "medium";
 
+                NbOfDistraction = 10;
+
                 DisableMenu();
                 Lvl2();
                 break;
             case 3:
                 Debug.Log("start lvl 3");
                 LevelName = "hard";
+
+                NbOfDistraction =15;
                 DisableMenu();
                 Lvl3();
                 break;
@@ -101,6 +110,8 @@ public class GameManager : MonoBehaviour
             case 4:
                 Debug.Log("start lvl 4");
                 LevelName = "Lengendary";
+
+                NbOfDistraction = 20;
                 DisableMenu();
                 Lvl4();
                 break;
@@ -161,7 +172,7 @@ public class GameManager : MonoBehaviour
     {
         var Xlocation = Random.Range(-1f, 1f);
         var ZLocation = Random.Range(-1f, 1f);
-        var NewLocation = new Vector3(HeadsetLocation.transform.position.x + Xlocation, 0, HeadsetLocation.transform.position.z + ZLocation);
+        var NewLocation = new Vector3(HeadsetLocation.transform.position.x + Xlocation, GroundLocation, HeadsetLocation.transform.position.z + ZLocation);
 
         return NewLocation;
     }
@@ -196,7 +207,7 @@ public class GameManager : MonoBehaviour
             obj.SetActive(true);
             answerObjects.Add(obj);
         }
-        for (int i = 0; i<10;i++)
+        for (int i = 0; i< NbOfDistraction; i++)
         {
           int tempNum = RandomNumber(0, numberObjectsPrefabs.Length);
           if (question[1].ToString().Contains(tempNum.ToString()))
