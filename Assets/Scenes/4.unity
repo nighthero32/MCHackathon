@@ -2732,16 +2732,16 @@ MonoBehaviour:
   questionText: {fileID: 748406269}
   resultText: {fileID: 937824396}
   numberObjectsPrefabs:
-  - {fileID: 509553351988859280, guid: 91e02893237dacf408cf3a6a35581bd2, type: 3}
-  - {fileID: 9000071906935503740, guid: 326fb04101288e54d94367c62c660a6d, type: 3}
-  - {fileID: 1202180199834318087, guid: 250ccbac77e4cf149a99ef8c211402a5, type: 3}
-  - {fileID: 8352686590504854945, guid: ffb5d8c4b56b2df408c4e424f2a58451, type: 3}
-  - {fileID: 2369058938972878524, guid: ba899b95d786ea3478cdad0aaa8468cf, type: 3}
-  - {fileID: 8187838486800016849, guid: 552b11fed8a34454b8df8a112f917bd6, type: 3}
-  - {fileID: 3681715641511008732, guid: 31190c1e72962cc4fb03aee6a3cbcbc1, type: 3}
-  - {fileID: 1709063740837495599, guid: 866599cfd9cd3234ba67217b92212fb8, type: 3}
-  - {fileID: 2641006058085558546, guid: 4a62b79658bf21a41ba9b6e628973dfe, type: 3}
-  - {fileID: 1094531571684269400, guid: 6f47c277238a70d46a5d776026b3d1ce, type: 3}
+  - {fileID: 520458325385199207, guid: dd160e54f46a1624bba5e5af3fd5349c, type: 3}
+  - {fileID: 1263489677719272021, guid: 28625974dd58c6b459b9fb5b6117ecb9, type: 3}
+  - {fileID: 7646838809195113525, guid: 6c17937102d2e8549b66f0504e6886e9, type: 3}
+  - {fileID: 5792059465742091140, guid: 3e2cc84a8a8516f458a19e48f1021331, type: 3}
+  - {fileID: 8590845353198526732, guid: 3f88cd5656232b542b1004245cfbe3dd, type: 3}
+  - {fileID: 7447661566807547189, guid: 8de97ad1da09f0a4bbbe2b6371be12bb, type: 3}
+  - {fileID: 3561384930836006428, guid: cdfe551d9c22aa649becef99588874c8, type: 3}
+  - {fileID: 4368769378466837335, guid: 5c4b6ca3bb1f20c43b1c72191d1e43c2, type: 3}
+  - {fileID: 783057304119754159, guid: d14801f9eca5ea24f991f0ab7a7c7c71, type: 3}
+  - {fileID: 14561217485468976, guid: 16a89e6c066dfd649b9637ce6440fd57, type: 3}
   numberObjects:
   - {fileID: 0}
   - {fileID: 0}
